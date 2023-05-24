@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname bonus) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname resistance) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 
 ;; (compute-resistance c1 c2 c3)
 ;; produce the resistance value from 3 color bands
@@ -10,11 +10,18 @@
 (check-expect (compute-resistance 'red 'black 'brown) 200)
 
 ;; compute-resistance: String String String -> Num
-(define (compute-resistance c1 c2 c3) 
-    0    
+(define (compute-resistance c1 c2 c3)
+
+    (*  (expt 10 (get-val c3))
+        (+
+            (* 10 (get-val c1))
+            (get-val c2)
+        )
+    )
+
 )
-(check-expect (compute-resistance 'black 'black 'back) 0)
-(check-expect (compute-resistance 'brown 'black 'red) 200)
+(check-expect (compute-resistance 'black 'black 'black) 0)
+(check-expect (compute-resistance 'brown 'black 'red) 1000)
 (check-expect (compute-resistance 'white 'white 'white) 99000000000)
 
 ;; (get-val color)
