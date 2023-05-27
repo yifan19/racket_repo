@@ -81,3 +81,85 @@
 (check-day-valid? 19980229)
 (check-day-valid? 20000229)
 (check-day-valid? 21000229)
+
+;; (date->day-of-week date)
+;; produce the resistance value from 3 color bands
+
+;; Examples:
+(check-expect (date->day-of-week 38781202) 'Monday)
+(check-expect (date->day-of-week 18321401) 'Invalid)
+(check-expect (date->day-of-week 1920303) 'Invalid)
+
+;; date->day-of-week: String String String -> Num
+(define (date->day-of-week date)
+    
+    
+    (remainder
+        (+
+            ;; day 
+            (remainder date 100)
+            (floor
+                (- 
+                    (* 2.6 
+                        ;; month
+                        (remainder (quotient date 100) 100)
+                    )
+                    0.2
+                )
+            )
+            (* -2
+                (remainder date 1000000)   
+            )
+            ;; year
+            (remainder date 10000)
+            (floor 
+                ;; year
+                (/ (remainder date 10000) 4)
+            )
+            (floor 
+                ;; century
+                (/ (remainder date 1000000) 4)
+            )
+        ) 7
+    )
+)
+
+(date->day-of-week 38781203)
+;; Tests:
+(check-expect (date->day-of-week 38781203) 'Tuesday)
+(check-expect (date->day-of-week 38781204) 'Wednesday)
+(check-expect (date->day-of-week 38781205) 'Thusrday)
+(check-expect (date->day-of-week 38781206) 'Friday)
+(check-expect (date->day-of-week 38781207) 'Saturday)
+(check-expect (date->day-of-week 38781208) 'Sunday)
+
+(define (day date)
+
+    (cond [(<= (remainder date 100)
+)
+
+(define (day month))
+
+
+
+(define (translate week_num)
+
+    (cond 
+        [(= week_num 1)  'Monday]
+        [(= week_num 2)  'Tuesday]
+        [(= week_num 3)  'Wednesday]
+        [(= week_num 4)  'Thusrday]
+        [(= week_num 5)  'Friday]
+        [(= week_num 6)  'Saturday]
+        [(= week_num 0)  'Sunday]
+        [else 'Invalid]
+    )
+)
+
+(translate -1)
+
+(define (get-year date)
+    (remainder date 100)
+)
+
+(get-year 345)
